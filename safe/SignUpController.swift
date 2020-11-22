@@ -26,6 +26,11 @@ class SignUpController: UIViewController{
                     }
                 }
                 if(authResult != nil){
+                    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                    changeRequest?.displayName = "Normal"
+                    changeRequest?.commitChanges { (error) in
+                      print(error)
+                    }
                     let db = Firestore.firestore()
                     let user = Auth.auth().currentUser
                     db.collection("users").document(user!.uid).setData([

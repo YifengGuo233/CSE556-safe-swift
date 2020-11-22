@@ -38,25 +38,27 @@ class ProfileViewController: UIViewController{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        let defaults = UserDefaults.standard
+        if let firstname = defaults.string(forKey: "firstName") {
+            username.text = firstname
+        }
         let user = Auth.auth().currentUser
         if let user = user {
-          // The user's ID, unique to the Firebase project.
-          // Do NOT use this value to authenticate with your backend server,
-          // if you have one. Use getTokenWithCompletion:completion: instead.
           let uid = user.uid
-          let email = user.email
-          let photoURL = user.photoURL
             let db = Firestore.firestore()
             let docRef = db.collection("users").document(uid)
             docRef.getDocument { [self] (document, error) in
                 if let document = document, document.exists {
-                    print(document.data())
-                    print(document.data()?["firstName"])
-                    if(document.data()?["firstName"] != nil){
-                        username.text = document.data()?["firstName"] as? String
+                    let data = document.data()
+                    if let firstname = data?["firstName"]{
+                        username.text = firstname as? String
+                        defaults.set(firstname, forKey: "firstName")
                     }
-                    else{
-                        username.text = "Dear User"
+                    if let lastname = data?["lastName"]{
+                        defaults.set(lastname, forKey: "lastName")
+                    }
+                    if let phoneNumber = data?["phoneNumber"]{
+                        defaults.set(phoneNumber, forKey: "phoneNumber")
                     }
                 } else {
                     print("Document does not exist")

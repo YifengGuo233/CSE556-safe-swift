@@ -11,6 +11,7 @@ import Firebase
 class DetailViewController: UIViewController{
     
     @IBOutlet var CodeField: UILabel!
+    @IBOutlet var SelectTimeField: UIButton!
     var Code: String = ""
     var data: String = ""
     @IBAction func lineUpButtonClick(_ sender: Any) {
@@ -43,7 +44,14 @@ class DetailViewController: UIViewController{
             defaults.set(Code, forKey: "Code")
             CodeField.text = Code
         }
+        if let startTime = defaults.string(forKey: "startTime") {
+            let endTime = defaults.string(forKey: "endTime") ?? ""
+            let seat = defaults.string(forKey: "seat") ?? ""
+            let conStr = startTime + " - " + endTime + " have " + String(seat) + " left"
+            SelectTimeField.setTitle(conStr, for: .normal)
+        }
         
+        //Store
         if let stringOne = defaults.string(forKey: "storeName") {
             print(stringOne) // Some String Value
         }

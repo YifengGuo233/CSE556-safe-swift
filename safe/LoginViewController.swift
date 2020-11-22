@@ -21,14 +21,24 @@ class LoginViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
           guard let strongSelf = self else { return }
             if(authResult != nil){
-                print("login")
-                let alert = UIAlertController(title: "Login", message: "You are logined!", preferredStyle: .alert)
-                self!.present(alert, animated: true)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        alert.dismiss(animated: true, completion: nil)
-                    self!.performSegue(withIdentifier: "loginSegue", sender: nil)
+                if let user = Auth.auth().currentUser{
+                    if(user.displayName == "Normal"){
+                        let alert = UIAlertController(title: "Login", message: "You are logined!", preferredStyle: .alert)
+                        self!.present(alert, animated: true)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                alert.dismiss(animated: true, completion: nil)
+                            self!.performSegue(withIdentifier: "loginSegue", sender: nil)
+                        }
+                    }
+                    else{
+                        let alert = UIAlertController(title: "Login", message: "Welcome back Business Owner!", preferredStyle: .alert)
+                        self!.present(alert, animated: true)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                alert.dismiss(animated: true, completion: nil)
+                            self!.performSegue(withIdentifier: "businessLoginSegue", sender: nil)
+                        }
+                    }
                 }
-                
             }
             else{
                 let alert = UIAlertController(title: "Auth Failed", message: "The combination of your password and username is wrong", preferredStyle: .alert)

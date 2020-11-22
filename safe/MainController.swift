@@ -26,8 +26,8 @@ class MainController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("create cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-        cell.storeName.text = storeArray[indexPath.row]
-            return cell
+        cell.storeName.text = storeArray[indexPath.row].storeName
+        return cell
     }
     
     
@@ -37,40 +37,55 @@ class MainController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let defaults = UserDefaults.standard
-        defaults.set(storeArray[indexPath.row], forKey: "storeName")
+        defaults.set(storeArray[indexPath.row].storeName, forKey: "storeName")
+        defaults.set(storeArray[indexPath.row].storeId, forKey: "storeId")
         let contextItem = UIContextualAction(style: .normal, title: "Line Up") { [self] (contextualAction, view, boolValue) in
                 boolValue(true) // pass true if you want the handler to allow the action
+                let defaults = UserDefaults.standard
+                defaults.removeObject(forKey:"Code")
+                defaults.removeObject(forKey:"startTime")
+                defaults.removeObject(forKey:"endTime")
+                defaults.removeObject(forKey:"seat")
                 self.performSegue(withIdentifier: "storeSegue", sender: nil)
             }
             let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
             return swipeActions
     }
 
-    var storeArray: [String] = ["Store1","Store2","Store3"]
+    var storeArray: [Store] = []
     
-    //var data: String = ""
     var dataPass: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetch()
         table.delegate = self;
         table.dataSource = self;
-        
         let user = Auth.auth().currentUser
         if let user = user {
-          // The user's ID, unique to the Firebase project.
-          // Do NOT use this value to authenticate with your backend server,
-          // if you have one. Use getTokenWithCompletion:completion: instead.
-          let uid = user.uid
-          let email = user.email
-          let photoURL = user.photoURL
-          print(uid)
-          print(email)
-    
+              let email = user.email
+              let defaults = UserDefaults.standard
+              defaults.set(email, forKey: "email")
         }
-        print(storeArray.count)
-        print(storeArray)
-        //self.table.reloadData()
+    }
+    
+    func fetch(){
+        let db = Firestore.firestore()
+        if let user = Auth.auth().currentUser{
+            db.collection("store")
+                .addSnapshotListener { querySnapshot, error in
+                    guard let documents = querySnapshot?.documents else {
+                        print("Error fetching documents: \(error!)")
+                        return
+                    }
+                    for document in documents {
+                        let data = document.data()
+                        let id = document.documentID
+                        let temp = Store(storeId: id , storeName: data["storeName"] as! String, addressOne: data["addressOne"] as! String, addressTwo: data["addressTwo"] as! String, state: data["state"] as! String, city: data["city"] as! String, zip: data["zip"] as! String)
+                        self.storeArray.append(temp)
+                    }
+                    self.table.reloadData()
+                }
+        }
     }
 
 }
