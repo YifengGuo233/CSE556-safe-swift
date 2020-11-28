@@ -14,6 +14,18 @@ class DetailViewController: UIViewController{
     @IBOutlet var SelectTimeField: UIButton!
     var Code: String = ""
     var data: String = ""
+
+    @IBOutlet var alertMeField: UITextField!
+    @IBOutlet var numberOfGuestField: UITextField!
+    @IBAction func alertMeChanged(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(alertMeField.text, forKey: "alertMe")
+    }
+    
+    @IBAction func numberOfGuestChanged(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(numberOfGuestField.text, forKey: "numberOfGuest")
+    }
     @IBAction func lineUpButtonClick(_ sender: Any) {
         
         self.performSegue(withIdentifier: "lineupSegue", sender: nil)

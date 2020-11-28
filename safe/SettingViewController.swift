@@ -21,10 +21,29 @@ class SettingViewController: UIViewController{
         let db = Firestore.firestore()
         let user = Auth.auth().currentUser
         if let user = user {
+            let defaults = UserDefaults.standard
+            var firstname_ = ""
+            var lastname_ = ""
+            var phoneNumber_ = ""
+            if(firstName.text != "" && firstName.text != ""){
+                firstname_ = firstName.text!
+            }else{
+                firstname_ = defaults.string(forKey: "firstName") ?? ""
+            }
+            if(lastName.text != "" && lastName.text != ""){
+                lastname_ = lastName.text!
+            }else{
+                lastname_ = defaults.string(forKey: "lastName") ?? ""
+            }
+            if(phoneNumber.text != "" && phoneNumber.text != ""){
+                phoneNumber_ = phoneNumber.text!
+            }else{
+                phoneNumber_ = defaults.string(forKey: "phoneNumber") ?? ""
+            }
             db.collection("users").document(user.uid).updateData([
-                "firstName": firstName.text ?? firstName.placeholder!,
-                "lastName": lastName.text ?? lastName.placeholder!,
-                "phoneNumber": phoneNumber.text ?? phoneNumber.placeholder!
+                "firstName": firstname_,
+                "lastName": lastname_,
+                "phoneNumber": phoneNumber_,
             ]) { err in
                 if let err = err {
                     print("Error updating document: \(err)")
@@ -34,8 +53,9 @@ class SettingViewController: UIViewController{
                     self.present(alert, animated: true)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             alert.dismiss(animated: true, completion: nil)
+                            //self.performSegue(withIdentifier: "afterSetting", sender: nil)
                         }
-                    //self.performSegue(withIdentifier: "afterSetting", sender: nil)
+                    //
                     
                 }
             }

@@ -1,25 +1,17 @@
 //
-//  ProfileViewController.swift
+//  ProfileBusinessViewController.swift
 //  safe
 //
-//  Created by Yifeng Guo on 11/21/20.
+//  Created by Yifeng Guo on 11/28/20.
 //
 
 import Foundation
 import UIKit
 import Firebase
-class ProfileViewController: UIViewController{
-    @IBOutlet var username: UILabel!
-    @IBOutlet var userProfileImage: UIImageView!
+class ProfileBusinesViewController: UIViewController{
 
-    @IBAction func myLineUpButtonClick(_ sender: Any) {
-    }
     
-    @IBAction func settingButtonClick(_ sender: Any) {
-        
-    }
-    
-    @IBAction func SignOutButtonClick(_ sender: Any) {
+    @IBAction func logoutClick(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
@@ -27,24 +19,28 @@ class ProfileViewController: UIViewController{
             print ("Error signing out: %@", signOutError)
         }
         print("logout")
-        self.performSegue(withIdentifier: "logoutSegue", sender: nil)
+        self.performSegue(withIdentifier: "logoutBusinessSegue", sender: nil)
     }
+    
+    @IBOutlet var username: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         let defaults = UserDefaults.standard
         if let firstname = defaults.string(forKey: "firstName"){
-            if let lastname = defaults.string(forKey: "lastName"){
-                username.text = "Hi! " + firstname + " " + lastname
+            if let lastName = defaults.string(forKey: "lastName"){
+                username.text = "Hi! " + firstname + " " + lastName
             }
         }
         let user = Auth.auth().currentUser
         if let user = user {
           let uid = user.uid
             let db = Firestore.firestore()
-            let docRef = db.collection("users").document(uid)
+            let docRef = db.collection("store").document(uid)
             docRef.getDocument { [self] (document, error) in
                 if let document = document, document.exists {
                     let data = document.data()
+                    print("b data")
+                    print(data)
                     if let firstname = data?["firstName"] as? String{
                         if let lastname = data?["lastName"] as? String{
                             username.text = "Hi! " + firstname + " " + lastname
@@ -55,19 +51,29 @@ class ProfileViewController: UIViewController{
                     if let phoneNumber = data?["phoneNumber"]{
                         defaults.set(phoneNumber, forKey: "phoneNumber")
                     }
+                    if let addressOne = data?["addressOne"]{
+                        defaults.set(addressOne, forKey: "addressOne")
+                    }
+                    if let addressTwo = data?["addressTwo"]{
+                        defaults.set(addressTwo, forKey: "addressTwo")
+                    }
+                    if let city = data?["city"]{
+                        defaults.set(city, forKey: "city")
+                    }
+                    if let state = data?["state"]{
+                        defaults.set(state, forKey: "state")
+                    }
+                    if let zip = data?["zip"]{
+                        defaults.set(zip, forKey: "zip")
+                    }
+                    if let storeName = data?["storeName"]{
+                        defaults.set(storeName, forKey: "storeName")
+                    }
                 } else {
                     print("Document does not exist")
                 }
             }
 
-        }
-    }
-    
-    
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "logoutSegue"{
-            let vc = segue.destination as! LoginViewController
-            //Data has to be a variable name in your RandomViewController
         }
     }
 }

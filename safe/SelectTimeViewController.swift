@@ -28,7 +28,7 @@ class SelectTimeViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "timeCell", for: indexPath) as! TimeTableViewCell
         cell.startTimeLabel.text = timeArray[indexPath.row].startTime
         cell.endTimeLabel.text = timeArray[indexPath.row].endTime
-        cell.seatLabel.text = "Seat Left: " + String( timeArray[indexPath.row].seat)
+        cell.seatLabel.text = "Seat Left: " + String( timeArray[indexPath.row].seatLeft)
             return cell
     }
     
@@ -37,6 +37,7 @@ class SelectTimeViewController: UIViewController, UITableViewDelegate, UITableVi
         defaults.set(timeArray[indexPath.row].startTime, forKey: "startTime")
         defaults.set(timeArray[indexPath.row].endTime, forKey: "endTime")
         defaults.set(timeArray[indexPath.row].seat, forKey: "seat")
+        defaults.set(timeArray[indexPath.row].id, forKey: "queueId")
         self.performSegue(withIdentifier: "selectTimeSegue", sender: nil)
     }
     
@@ -48,6 +49,7 @@ class SelectTimeViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         //timeArray.append(temp)
+        
         fetch()
         table.delegate = self;
         table.dataSource = self;
@@ -66,9 +68,10 @@ class SelectTimeViewController: UIViewController, UITableViewDelegate, UITableVi
                         }
                         for document in documents {
                             let data = document.data()
+                            print("date")
                             print(data)
-                            //let id = document.documentID
-                            let temp = TimeSlot(startTime: data["startTime"] as! String, endTime: data["endTime"] as! String, seat: data["seat"] as! String, seatLeft: data["seatLeft"] as! String)
+                            let id = document.documentID
+                            let temp = TimeSlot(id : id , startTime: data["startTime"] as! String, endTime: data["endTime"] as! String, seat: data["seat"] as! String, seatLeft: data["seatLeft"] as! String)
                             self.timeArray.append(temp)
                         }
                         self.table.reloadData()

@@ -11,10 +11,8 @@ import Firebase
 
 class QueueTableViewCell: UITableViewCell {
     
-    @IBOutlet var startTimeField: UILabel!
-    @IBOutlet var endTimeField: UILabel!
-    @IBOutlet var maxSeatField: UILabel!
-    @IBOutlet var seatLeftField: UILabel!
+    @IBOutlet var timeField: UILabel!
+    @IBOutlet var seatField: UILabel!
 }
 
 class BusinessViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
@@ -27,16 +25,37 @@ class BusinessViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "queueCell", for: indexPath) as! QueueTableViewCell
-        cell.startTimeField.text = queueArray[indexPath.row].startTime
-        cell.endTimeField.text = queueArray[indexPath.row].endTime
-        cell.maxSeatField.text = queueArray[indexPath.row].seat
-        cell.seatLeftField.text = queueArray[indexPath.row].seatLeft
+        cell.timeField.text = queueArray[indexPath.row].startTime + " - " + queueArray[indexPath.row].endTime
+        cell.seatField.text = queueArray[indexPath.row].seatLeft + " seat left(" +  queueArray[indexPath.row].seat + ")"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let defaults = UserDefaults.standard
+        defaults.set(queueArray[indexPath.row].id, forKey: "timeslotId")
+        defaults.set(queueArray[indexPath.row].startTime, forKey: "startTime")
+        defaults.set(queueArray[indexPath.row].endTime, forKey: "endTime")
+        defaults.set(queueArray[indexPath.row].seat, forKey: "seat")
+        defaults.set(queueArray[indexPath.row].seatLeft, forKey: "seatLeft")
+        let contextItem = UIContextualAction(style: .normal, title: "Edit") { [self] (contextualAction, view, boolValue) in
+                boolValue(true) // pass true if you want the handler to allow the action
+                self.performSegue(withIdentifier: "detailQueueSegue", sender: nil)
+            }
+            let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+            return swipeActions
     }
     
     var queueArray : [TimeSlot] = []
     override func viewDidLoad() {
-        
         let defaults = UserDefaults.standard
         let user = Auth.auth().currentUser
         if let user = user {
@@ -74,9 +93,10 @@ class BusinessViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                         for document in documents {
                             let data = document.data()
+                            print("1")
                             print(data)
-                            //let id = document.documentID
-                            let temp = TimeSlot(startTime: data["startTime"] as! String, endTime: data["endTime"] as! String, seat: data["seat"] as! String, seatLeft: data["seatLeft"] as! String)
+                            let id = document.documentID
+                            let temp = TimeSlot(id:id, startTime: data["startTime"] as! String, endTime: data["endTime"] as! String, seat: data["seat"] as! String, seatLeft: data["seatLeft"] as! String)
                             self.queueArray.append(temp)
                         }
                         self.table.reloadData()

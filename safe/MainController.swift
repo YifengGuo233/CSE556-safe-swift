@@ -27,6 +27,8 @@ class MainController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print("create cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         cell.storeName.text = storeArray[indexPath.row].storeName
+        cell.addressOne.text = storeArray[indexPath.row].addressOne
+        cell.addressTwo.text = storeArray[indexPath.row].addressTwo
         return cell
     }
     
@@ -46,6 +48,7 @@ class MainController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 defaults.removeObject(forKey:"startTime")
                 defaults.removeObject(forKey:"endTime")
                 defaults.removeObject(forKey:"seat")
+                defaults.removeObject(forKey:"queueId")
                 self.performSegue(withIdentifier: "storeSegue", sender: nil)
             }
             let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])

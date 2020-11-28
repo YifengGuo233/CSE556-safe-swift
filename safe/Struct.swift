@@ -6,6 +6,7 @@
 //
 
 struct TimeSlot {
+    var id = ""
     var startTime = ""
     var endTime = ""
     var seat = ""
@@ -28,4 +29,12 @@ struct MyLineUp{
     var startTime = ""
     var endTime = ""
     var waitCode = ""
+}
+
+struct People{
+    var id = ""
+    var firstName = ""
+    var lastName = ""
+    var waitCode = ""
+    var phone = ""
 }

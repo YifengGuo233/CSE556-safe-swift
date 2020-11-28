@@ -32,6 +32,9 @@
 		FC355699256A2A590082C6E1 /* BusinessSignUpTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC355698256A2A590082C6E1 /* BusinessSignUpTwoViewController.swift */; };
 		FC35569E256A2C560082C6E1 /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC35569D256A2C560082C6E1 /* BusinessViewController.swift */; };
 		FC3556A3256A34590082C6E1 /* AddQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3556A2256A34590082C6E1 /* AddQueueController.swift */; };
+		FCADD59D2571FDFC0008632C /* DetailQueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADD59C2571FDFC0008632C /* DetailQueueViewController.swift */; };
+		FCADD5A2257226400008632C /* ProfileBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADD5A1257226400008632C /* ProfileBusinessViewController.swift */; };
+		FCADD5A7257227B30008632C /* SettingBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADD5A6257227B30008632C /* SettingBusinessViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +92,9 @@
 		FC355698256A2A590082C6E1 /* BusinessSignUpTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSignUpTwoViewController.swift; sourceTree = "<group>"; };
 		FC35569D256A2C560082C6E1 /* BusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewController.swift; sourceTree = "<group>"; };
 		FC3556A2256A34590082C6E1 /* AddQueueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQueueController.swift; sourceTree = "<group>"; };
+		FCADD59C2571FDFC0008632C /* DetailQueueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQueueViewController.swift; sourceTree = "<group>"; };
+		FCADD5A1257226400008632C /* ProfileBusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBusinessViewController.swift; sourceTree = "<group>"; };
+		FCADD5A6257227B30008632C /* SettingBusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingBusinessViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +194,9 @@
 				FC355698256A2A590082C6E1 /* BusinessSignUpTwoViewController.swift */,
 				FC35569D256A2C560082C6E1 /* BusinessViewController.swift */,
 				FC3556A2256A34590082C6E1 /* AddQueueController.swift */,
+				FCADD59C2571FDFC0008632C /* DetailQueueViewController.swift */,
+				FCADD5A1257226400008632C /* ProfileBusinessViewController.swift */,
+				FCADD5A6257227B30008632C /* SettingBusinessViewController.swift */,
 			);
 			path = safe;
 			sourceTree = "<group>";
@@ -496,8 +505,11 @@
 				FC1CAA5525608C1900706E6D /* LoginViewController.swift in Sources */,
 				FC355691256A25910082C6E1 /* BusinessSignUpViewController.swift in Sources */,
 				FC1CAA5125608C1900706E6D /* AppDelegate.swift in Sources */,
+				FCADD59D2571FDFC0008632C /* DetailQueueViewController.swift in Sources */,
+				FCADD5A2257226400008632C /* ProfileBusinessViewController.swift in Sources */,
 				FC355699256A2A590082C6E1 /* BusinessSignUpTwoViewController.swift in Sources */,
 				FC3556682569C1A60082C6E1 /* SettingViewController.swift in Sources */,
+				FCADD5A7257227B30008632C /* SettingBusinessViewController.swift in Sources */,
 				FC35567A2569D8520082C6E1 /* LineUpViewController.swift in Sources */,
 				FC1CAA5325608C1900706E6D /* SceneDelegate.swift in Sources */,
 				FC35566D2569CA220082C6E1 /* DeatilViewController.swift in Sources */,
