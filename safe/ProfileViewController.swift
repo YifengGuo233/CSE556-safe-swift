@@ -27,7 +27,12 @@ class ProfileViewController: UIViewController{
             print ("Error signing out: %@", signOutError)
         }
         print("logout")
-        self.performSegue(withIdentifier: "logoutSegue", sender: nil)
+        let alert = UIAlertController(title: "Logging out..", message: "You have logged out successfully!", preferredStyle: .alert)
+        self.present(alert, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                alert.dismiss(animated: true, completion: nil)
+            self.performSegue(withIdentifier: "logoutSegue", sender: nil)
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()

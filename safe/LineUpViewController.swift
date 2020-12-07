@@ -16,6 +16,7 @@ class LineUpViewController: UIViewController{
         print(defaults)
         let storeId = defaults.string(forKey: "storeId") ?? ""
         let queueId = defaults.string(forKey: "queueId") ?? ""
+        let storeName = defaults.string(forKey: "storeName") ?? ""
         let db = Firestore.firestore()
         if let user = Auth.auth().currentUser{
             db.collection("store").document(storeId).collection("queue").document(queueId).collection("users").document(user.uid).delete() { err in
@@ -61,8 +62,12 @@ class LineUpViewController: UIViewController{
                 }
         
             defaults.removeObject(forKey:"Code")
-            
-            self.performSegue(withIdentifier: "doneOrCancelSegue", sender: nil)
+            let alert = UIAlertController(title: "Line Up Cancelled", message: "You have cancelled your line up at " + storeName + ".", preferredStyle: .alert)
+            self.present(alert, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    alert.dismiss(animated: true, completion: nil)
+                self.performSegue(withIdentifier: "doneOrCancelSegue", sender: nil)
+                }
         }
         
     }
@@ -73,6 +78,7 @@ class LineUpViewController: UIViewController{
         let defaults = UserDefaults.standard
         let storeId = defaults.string(forKey: "storeId") ?? ""
         let queueId = defaults.string(forKey: "queueId") ?? ""
+        let storeName = defaults.string(forKey: "storeName") ?? ""
         let db = Firestore.firestore()
         if let user = Auth.auth().currentUser{
             db.collection("store").document(storeId).collection("queue").document(queueId).collection("users").document(user.uid).setData([
@@ -133,7 +139,12 @@ class LineUpViewController: UIViewController{
             
             
             defaults.removeObject(forKey:"Code")
-            self.performSegue(withIdentifier: "doneOrCancelSegue", sender: nil)
+            let alert = UIAlertController(title: "Line Up Successful!", message: "You have lined up for " + storeName + "!", preferredStyle: .alert)
+            self.present(alert, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    alert.dismiss(animated: true, completion: nil)
+                self.performSegue(withIdentifier: "doneOrCancelSegue", sender: nil)
+                }
         }
     }
     @IBOutlet var CodeField: UILabel!

@@ -26,7 +26,7 @@ class BusinessViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "queueCell", for: indexPath) as! QueueTableViewCell
         cell.timeField.text = queueArray[indexPath.row].startTime + " - " + queueArray[indexPath.row].endTime
-        cell.seatField.text = queueArray[indexPath.row].seatLeft + " seat left(" +  queueArray[indexPath.row].seat + ")"
+        cell.seatField.text = queueArray[indexPath.row].seatLeft + " seats left (" +  queueArray[indexPath.row].seat + ")"
         return cell
     }
     

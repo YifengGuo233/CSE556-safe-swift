@@ -24,7 +24,7 @@ class DetailQueueViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "queueCell", for: indexPath) as! QueueTableCell
-        cell.nameField.text = "name: " + peopleArray[indexPath.row].firstName + " " + peopleArray[indexPath.row].lastName
+        cell.nameField.text = "Name: " + peopleArray[indexPath.row].firstName + " " + peopleArray[indexPath.row].lastName
             cell.phoneField.text = peopleArray[indexPath.row].phone
         return cell
     }

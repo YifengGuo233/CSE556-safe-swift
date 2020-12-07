@@ -55,7 +55,12 @@ class EditQueueController: UIViewController{
                             print("Error delete document: \(err)")
                         } else {
                             print("successful delete queue")
-                            self.performSegue(withIdentifier: "deleteSegue", sender: nil)
+                            let alert = UIAlertController(title: "Queue Deleted", message: "The queue was sucessfully deleted!", preferredStyle: .alert)
+                            self.present(alert, animated: true)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    alert.dismiss(animated: true, completion: nil)
+                                self.performSegue(withIdentifier: "deleteSegue", sender: nil)
+                            }
                         }
             }
             
@@ -101,7 +106,12 @@ class EditQueueController: UIViewController{
                         print("Error adding document: \(err)")
                     } else {
                         print("success")
-                        self.performSegue(withIdentifier: "editconfirmChangeSegue", sender: nil)
+                        let alert = UIAlertController(title: "Queue Edited", message: "The queue was sucessfully edited!", preferredStyle: .alert)
+                        self.present(alert, animated: true)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                alert.dismiss(animated: true, completion: nil)
+                            self.performSegue(withIdentifier: "editconfirmChangeSegue", sender: nil)
+                        }
                     }
                 }
             }
