@@ -36,9 +36,15 @@ class AddQueueController: UIViewController{
     }
     
     @IBAction func confirmChangeButtonClick(_ sender: Any) {
-        if(peopleField.text != ""
-            && startTime != "N/A"
-            && endTime != "N/A"){
+        //&& startTime != "N/A"
+        //&& endTime != "N/A"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        let startstrDate = dateFormatter.string(from: startTimePicker.date)
+        let endstrDate = dateFormatter.string(from: endTimePicker.date)
+        startTime = startstrDate;
+        endTime = endstrDate;
+        if(peopleField.text != ""){
             let people:Int = Int(peopleField.text!) ?? -1
             print(people)
             if(people < 0){

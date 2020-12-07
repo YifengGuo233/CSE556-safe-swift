@@ -12,6 +12,7 @@ import Firebase
 
 class LineUpTableViewCell: UITableViewCell {
     @IBOutlet var storeName: UILabel!
+    @IBOutlet var timeLabel: UILabel!
 }
 class MyLineUpViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -21,6 +22,7 @@ class MyLineUpViewController: UIViewController, UITableViewDelegate, UITableView
         print("create cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "LineUpCell", for: indexPath) as! LineUpTableViewCell
         cell.storeName.text = lineUpArray[indexPath.row].storeName
+        cell.timeLabel.text = lineUpArray[indexPath.row].startTime + " - " + lineUpArray[indexPath.row].endTime
         print(lineUpArray[indexPath.row])
             return cell
     }
@@ -29,12 +31,14 @@ class MyLineUpViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let waitcode = lineUpArray[indexPath.row].waitCode
         let storeId = lineUpArray[indexPath.row].storeId
+        let queueId = lineUpArray[indexPath.row].queueId
         let storeName = lineUpArray[indexPath.row].storeName
         let startTime = lineUpArray[indexPath.row].startTime
         let endTime = lineUpArray[indexPath.row].endTime
         let defaults = UserDefaults.standard
         defaults.set(waitcode, forKey: "Code")
         defaults.set(storeId, forKey: "storeId")
+        defaults.set(queueId, forKey: "queueId")
         defaults.set(storeName, forKey: "storeName")
         defaults.set(startTime, forKey: "startTime")
         defaults.set(endTime, forKey: "endTime")
@@ -49,6 +53,7 @@ class MyLineUpViewController: UIViewController, UITableViewDelegate, UITableView
         fetch()
         table.delegate = self;
         table.dataSource = self;
+        table.reloadData()
     }
     
     func fetch(){
@@ -62,7 +67,7 @@ class MyLineUpViewController: UIViewController, UITableViewDelegate, UITableView
                     }
                     for document in documents {
                         let data = document.data()
-                        let temp = MyLineUp(storeId: data["storeId"] as! String, storeName: data["storeName"] as! String, startTime: data["startTime"] as! String, endTime: data["endTime"] as! String, waitCode: data["waitCode"] as! String)
+                        let temp = MyLineUp(storeId: data["storeId"] as! String, storeName: data["storeName"] as! String, queueId: data["queueId"] as! String, startTime: data["startTime"] as! String, endTime: data["endTime"] as! String, waitCode: data["waitCode"] as! String)
                         self.lineUpArray.append(temp)
                     }
                 }

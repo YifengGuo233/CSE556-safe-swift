@@ -42,10 +42,10 @@ class DetailQueueViewController: UIViewController, UITableViewDelegate, UITableV
                 boolValue(true) // pass true if you want the handler to allow the action
             let db = Firestore.firestore()
             if let storeId = defaults.string(forKey: "storeId"){
-                if let timeslotId = defaults.string(forKey: "timeslotId"){
+                if let queueId = defaults.string(forKey: "queueId"){
                     
                     /*Below is to delete info from both store and user side*/
-                    db.collection("store").document(storeId).collection("queue").document(timeslotId).collection("users").document(userId).delete() { err in
+                    db.collection("store").document(storeId).collection("queue").document(queueId).collection("users").document(userId).delete() { err in
                         if let err = err {
                             print("Error removing document: \(err)")
                         } else {
@@ -65,7 +65,7 @@ class DetailQueueViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     /*Below is to check update remaining seat*/
                     var count = 0;
-                    db.collection("store").document(storeId).collection("queue").document(timeslotId).collection("users").getDocuments() { (querySnapshot, err) in
+                    db.collection("store").document(storeId).collection("queue").document(queueId).collection("users").getDocuments() { (querySnapshot, err) in
                         if let err = err {
                             print("Error getting documents: \(err)")
                         } else {
@@ -76,7 +76,7 @@ class DetailQueueViewController: UIViewController, UITableViewDelegate, UITableV
                                 print(seatInt)
                                 let seatLeft = seatInt - count;
                                 
-                                db.collection("store").document(storeId).collection("queue").document(timeslotId).updateData([
+                                db.collection("store").document(storeId).collection("queue").document(queueId).updateData([
                                     "seatLeft": String(seatLeft),
                                     ]) { err in
                                         if let err = err {
@@ -123,10 +123,10 @@ class DetailQueueViewController: UIViewController, UITableViewDelegate, UITableV
     func fetch(){
         let defaults = UserDefaults.standard
         if let storeId = defaults.string(forKey: "storeId"){
-            if let timeslotId = defaults.string(forKey: "timeslotId"){
+            if let queueId = defaults.string(forKey: "queueId"){
             let db = Firestore.firestore()
             if let user = Auth.auth().currentUser{
-                db.collection("store").document(storeId).collection("queue").document(timeslotId).collection("users")
+                db.collection("store").document(storeId).collection("queue").document(queueId).collection("users")
                     .addSnapshotListener { querySnapshot, error in
                         guard let documents = querySnapshot?.documents else {
                             print("Error fetching documents: \(error!)")

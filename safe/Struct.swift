@@ -6,7 +6,7 @@
 //
 
 struct TimeSlot {
-    var id = ""
+    var queueId = ""
     var startTime = ""
     var endTime = ""
     var seat = ""
@@ -26,6 +26,7 @@ struct Store{
 struct MyLineUp{
     var storeId = ""
     var storeName = ""
+    var queueId = ""
     var startTime = ""
     var endTime = ""
     var waitCode = ""

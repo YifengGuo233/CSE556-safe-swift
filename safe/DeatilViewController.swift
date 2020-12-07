@@ -58,7 +58,7 @@ class DetailViewController: UIViewController{
         }
         if let startTime = defaults.string(forKey: "startTime") {
             let endTime = defaults.string(forKey: "endTime") ?? ""
-            let seat = defaults.string(forKey: "seat") ?? ""
+            let seat = defaults.string(forKey: "seatLeft") ?? ""
             let conStr = startTime + " - " + endTime + " have " + String(seat) + " left"
             SelectTimeField.setTitle(conStr, for: .normal)
         }

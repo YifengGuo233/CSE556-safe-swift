@@ -32,6 +32,18 @@ class MainController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let defaults = UserDefaults.standard
+        defaults.set(storeArray[indexPath.row].storeName, forKey: "storeName")
+        defaults.set(storeArray[indexPath.row].storeId, forKey: "storeId")
+        defaults.removeObject(forKey:"Code")
+        defaults.removeObject(forKey:"startTime")
+        defaults.removeObject(forKey:"endTime")
+        defaults.removeObject(forKey:"seat")
+        defaults.removeObject(forKey:"queueId")
+        self.performSegue(withIdentifier: "storeSegue", sender: nil)
+    }
+    
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
