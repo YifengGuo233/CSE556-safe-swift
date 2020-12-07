@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
             if(authResult != nil){
                 if let user = Auth.auth().currentUser{
                     if(user.displayName == "Normal"){
-                        let alert = UIAlertController(title: "Login", message: "You are logined!", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Login", message: "You are logged in!", preferredStyle: .alert)
                         self!.present(alert, animated: true)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 alert.dismiss(animated: true, completion: nil)
@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
                         }
                     }
                     else{
-                        let alert = UIAlertController(title: "Login", message: "Welcome back Business Owner!", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Login", message: "Welcome back, Business Owner!", preferredStyle: .alert)
                         self!.present(alert, animated: true)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 alert.dismiss(animated: true, completion: nil)
@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
                 }
             }
             else{
-                let alert = UIAlertController(title: "Auth Failed", message: "The combination of your password and username is wrong", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Auth Failed", message: "The combination of your password and username is wrong. Please try again.", preferredStyle: .alert)
                 self!.present(alert, animated: true)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         alert.dismiss(animated: true, completion: nil)

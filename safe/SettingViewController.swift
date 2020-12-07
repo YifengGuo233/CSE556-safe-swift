@@ -49,7 +49,7 @@ class SettingViewController: UIViewController{
                     print("Error updating document: \(err)")
                 } else {
                     print("Document successfully updated")
-                    let alert = UIAlertController(title: "Information Update", message: "Your information is update in our database", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Information Update", message: "Your information was updated in our database!", preferredStyle: .alert)
                     self.present(alert, animated: true)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             alert.dismiss(animated: true, completion: nil)

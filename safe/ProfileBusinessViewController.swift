@@ -28,7 +28,7 @@ class ProfileBusinesViewController: UIViewController{
         let defaults = UserDefaults.standard
         if let firstname = defaults.string(forKey: "firstName"){
             if let lastName = defaults.string(forKey: "lastName"){
-                username.text = "Hi! " + firstname + " " + lastName
+                username.text = "Hi, " + firstname + " " + lastName + "!"
             }
         }
         let user = Auth.auth().currentUser
@@ -43,7 +43,7 @@ class ProfileBusinesViewController: UIViewController{
                     print(data)
                     if let firstname = data?["firstName"] as? String{
                         if let lastname = data?["lastName"] as? String{
-                            username.text = "Hi! " + firstname + " " + lastname
+                            username.text = "Hi, " + firstname + " " + lastname + "!"
                             defaults.set(firstname, forKey: "firstName")
                             defaults.set(lastname, forKey: "lastName")
                         }

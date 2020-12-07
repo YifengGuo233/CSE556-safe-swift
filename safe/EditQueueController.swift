@@ -78,7 +78,7 @@ class EditQueueController: UIViewController{
             let people:Int = Int(maxPeople.text!) ?? -1
             print(people)
             if(people < 0){
-                let alert = UIAlertController(title: "Format error", message: "You need to enter Non-Negative Integer~", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Format error", message: "You must enter a non-negative integer.", preferredStyle: .alert)
                 self.present(alert, animated: true)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         alert.dismiss(animated: true, completion: nil)
@@ -107,7 +107,7 @@ class EditQueueController: UIViewController{
             }
         }
         else{
-            let alert = UIAlertController(title: "Ops.. Miss something", message: "You are enter all the information~", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Oops..You are missing something!", message: "You must enter all the required information.", preferredStyle: .alert)
             self.present(alert, animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     alert.dismiss(animated: true, completion: nil)

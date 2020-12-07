@@ -19,7 +19,7 @@ class SignUpController: UIViewController{
         if(email.text != nil && password != nil){
             Auth.auth().createUser(withEmail: email.text!, password: password.text!) { [self] authResult, error in
                 if(error != nil){
-                    let alert = UIAlertController(title: "Invalid Format", message: "You email or password is invalid format", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Invalid Format", message: "You email or password is in an invalid format. Please try again.", preferredStyle: .alert)
                     self.present(alert, animated: true)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             alert.dismiss(animated: true, completion: nil)
@@ -48,7 +48,7 @@ class SignUpController: UIViewController{
             }
         }
         else{
-            let alert = UIAlertController(title: "Miss information", message: "Will need those information to contact you", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Missing information", message: "We will need the required information to contact you.", preferredStyle: .alert)
             self.present(alert, animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     alert.dismiss(animated: true, completion: nil)
