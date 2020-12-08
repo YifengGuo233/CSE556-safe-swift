@@ -10,7 +10,10 @@ import UIKit
 import Firebase
 class ProfileBusinesViewController: UIViewController{
 
-    
+    @IBOutlet var QRCodeView: UIView!
+    @IBAction func CreateQRCodeClick(_ sender: Any) {
+        QRCodeView.alpha = 1
+    }
     @IBAction func logoutClick(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {

@@ -10,7 +10,7 @@ target 'safe' do
   # add the Firebase pod for Google Analytics
 
 
-
+  pod 'SwiftGifOrigin'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'

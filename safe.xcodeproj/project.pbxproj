@@ -36,6 +36,12 @@
 		FCADD59D2571FDFC0008632C /* DetailQueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADD59C2571FDFC0008632C /* DetailQueueViewController.swift */; };
 		FCADD5A2257226400008632C /* ProfileBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADD5A1257226400008632C /* ProfileBusinessViewController.swift */; };
 		FCADD5A7257227B30008632C /* SettingBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADD5A6257227B30008632C /* SettingBusinessViewController.swift */; };
+		FCB63B0925801ECD00684659 /* GuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB63B0825801ECD00684659 /* GuestViewController.swift */; };
+		FCB63B34258022BA00684659 /* QRcode.gif in Resources */ = {isa = PBXBuildFile; fileRef = FCB63B33258022BA00684659 /* QRcode.gif */; };
+		FCB63B3925802A3E00684659 /* GuestInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB63B3825802A3E00684659 /* GuestInfoViewController.swift */; };
+		FCB63B3E25802A9000684659 /* GuestInfoDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB63B3D25802A9000684659 /* GuestInfoDisplayViewController.swift */; };
+		FCB63B4325802C1500684659 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB63B4225802C1400684659 /* unchecked.png */; };
+		FCB63B4825802C1B00684659 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB63B4725802C1B00684659 /* checked.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +103,12 @@
 		FCADD59C2571FDFC0008632C /* DetailQueueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQueueViewController.swift; sourceTree = "<group>"; };
 		FCADD5A1257226400008632C /* ProfileBusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBusinessViewController.swift; sourceTree = "<group>"; };
 		FCADD5A6257227B30008632C /* SettingBusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingBusinessViewController.swift; sourceTree = "<group>"; };
+		FCB63B0825801ECD00684659 /* GuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestViewController.swift; sourceTree = "<group>"; };
+		FCB63B33258022BA00684659 /* QRcode.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = QRcode.gif; sourceTree = "<group>"; };
+		FCB63B3825802A3E00684659 /* GuestInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestInfoViewController.swift; sourceTree = "<group>"; };
+		FCB63B3D25802A9000684659 /* GuestInfoDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestInfoDisplayViewController.swift; sourceTree = "<group>"; };
+		FCB63B4225802C1400684659 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
+		FCB63B4725802C1B00684659 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +212,12 @@
 				FCADD5A1257226400008632C /* ProfileBusinessViewController.swift */,
 				FCADD5A6257227B30008632C /* SettingBusinessViewController.swift */,
 				FCA48A13257B6FFC00F32EFB /* EditQueueController.swift */,
+				FCB63B0825801ECD00684659 /* GuestViewController.swift */,
+				FCB63B33258022BA00684659 /* QRcode.gif */,
+				FCB63B4725802C1B00684659 /* checked.png */,
+				FCB63B4225802C1400684659 /* unchecked.png */,
+				FCB63B3825802A3E00684659 /* GuestInfoViewController.swift */,
+				FCB63B3D25802A9000684659 /* GuestInfoDisplayViewController.swift */,
 			);
 			path = safe;
 			sourceTree = "<group>";
@@ -336,6 +354,9 @@
 				FC1CAA8425608C3700706E6D /* GoogleService-Info.plist in Resources */,
 				FC1CAA5A25608C1B00706E6D /* Assets.xcassets in Resources */,
 				FC1CAA5825608C1900706E6D /* Main.storyboard in Resources */,
+				FCB63B4825802C1B00684659 /* checked.png in Resources */,
+				FCB63B4325802C1500684659 /* unchecked.png in Resources */,
+				FCB63B34258022BA00684659 /* QRcode.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,9 +519,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC3556632569B3EA0082C6E1 /* ProfileViewController.swift in Sources */,
+				FCB63B3925802A3E00684659 /* GuestInfoViewController.swift in Sources */,
 				FC3556842569EC9B0082C6E1 /* Struct.swift in Sources */,
 				FC35567F2569E66D0082C6E1 /* SelectTimeViewController.swift in Sources */,
 				FC35569E256A2C560082C6E1 /* BusinessViewController.swift in Sources */,
+				FCB63B0925801ECD00684659 /* GuestViewController.swift in Sources */,
 				FC0B3D8D25679462007A13A0 /* SignUpController.swift in Sources */,
 				FC3556A3256A34590082C6E1 /* AddQueueController.swift in Sources */,
 				FC1CAAEE25609B8800706E6D /* MainController.swift in Sources */,
@@ -508,6 +531,7 @@
 				FC1CAA5525608C1900706E6D /* LoginViewController.swift in Sources */,
 				FC355691256A25910082C6E1 /* BusinessSignUpViewController.swift in Sources */,
 				FC1CAA5125608C1900706E6D /* AppDelegate.swift in Sources */,
+				FCB63B3E25802A9000684659 /* GuestInfoDisplayViewController.swift in Sources */,
 				FCA48A14257B6FFC00F32EFB /* EditQueueController.swift in Sources */,
 				FCADD59D2571FDFC0008632C /* DetailQueueViewController.swift in Sources */,
 				FCADD5A2257226400008632C /* ProfileBusinessViewController.swift in Sources */,
