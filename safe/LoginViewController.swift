@@ -10,6 +10,23 @@ import Firebase
 import Foundation
 class LoginViewController: UIViewController {
 
+    
+    @IBOutlet var showButton: UIButton!
+    var show = true;
+    @IBAction func showButtonClick(_ sender: Any) {
+        if(show){
+            InputPasswordTextField.isSecureTextEntry=false;
+            showButton.setTitle("hide", for: .normal)
+            show = false
+        }
+        else{
+            InputPasswordTextField.isSecureTextEntry=true;
+            showButton.setTitle("show", for: .normal)
+            show = true
+        }
+        
+    }
+    
     var handle: AuthStateDidChangeListenerHandle?
     @IBOutlet weak var InputEmailTextField: UITextField!
 

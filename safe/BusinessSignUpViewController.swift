@@ -10,6 +10,24 @@ import UIKit
 import Firebase
 
 class BusinessSignUpViewController: UIViewController{
+    
+    
+    
+    @IBOutlet var showButton: UIButton!
+    var show = true
+    @IBAction func showButtonClick(_ sender: Any) {
+        if(show){
+            show = false
+            passwordField.isSecureTextEntry = false
+            showButton.setTitle("hide", for: .normal)
+        }else{
+            show = true
+            passwordField.isSecureTextEntry = true
+            showButton.setTitle("show", for: .normal)
+        }
+    }
+    
+    
     @IBOutlet var firstnameField: UITextField!
     @IBOutlet var lastnameField: UITextField!
     @IBOutlet var emailField: UITextField!

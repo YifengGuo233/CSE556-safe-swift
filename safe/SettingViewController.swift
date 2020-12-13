@@ -11,6 +11,20 @@ import Firebase
 class SettingViewController: UIViewController{
     
     
+    
+    
+    @IBAction func backButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "settingBackSegue", sender: self)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "settingBackSegue"){
+            let barViewControllers = segue.destination as! UITabBarController
+            let destinationViewController = barViewControllers.selectedIndex=1
+            }
+    }
+    
     @IBOutlet var firstName: UITextField!
     @IBOutlet var lastName: UITextField!
     @IBOutlet var phoneNumber: UITextField!
@@ -53,6 +67,7 @@ class SettingViewController: UIViewController{
                     self.present(alert, animated: true)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             alert.dismiss(animated: true, completion: nil)
+                        self.performSegue(withIdentifier: "settingBackSegue", sender: self)
                             //self.performSegue(withIdentifier: "afterSetting", sender: nil)
                         }
                     //
@@ -78,5 +93,12 @@ class SettingViewController: UIViewController{
             phoneNumber.placeholder = phonenumber
         }
     }
+    
+    
+    
+    
+    
+    
+    
 
 }

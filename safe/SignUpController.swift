@@ -9,6 +9,24 @@ import Foundation
 import UIKit
 import Firebase
 class SignUpController: UIViewController{
+    
+    
+    @IBOutlet var showButton: UIButton!
+    var show = true
+    @IBAction func showButtonClick(_ sender: Any) {
+        if(show){
+            show = false
+            password.isSecureTextEntry = false
+            showButton.setTitle("hide", for: .normal)
+        }else{
+            show = true
+            password.isSecureTextEntry = true
+            showButton.setTitle("show", for: .normal)
+        }
+    }
+    
+    
+    
     @IBOutlet var firstName: UITextField!
     @IBOutlet var lastName: UITextField!
     @IBOutlet var email: UITextField!
