@@ -120,6 +120,14 @@ class DetailQueueViewController: UIViewController, UITableViewDelegate, UITableV
         queueTable.dataSource = self;
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        let alert = UIAlertController(title: "Note", message: "You can swipe right to edit/call person.", preferredStyle: .alert)
+        self.present(alert, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            alert.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     func fetch(){
         let defaults = UserDefaults.standard
         if let storeId = defaults.string(forKey: "storeId"){
