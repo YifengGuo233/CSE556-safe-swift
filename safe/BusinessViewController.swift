@@ -11,6 +11,8 @@ import Firebase
 
 class QueueTableViewCell: UITableViewCell {
     
+//    @IBOutlet var background: UIView!
+    
     @IBOutlet var timeField: UILabel!
     @IBOutlet var seatField: UILabel!
 }
@@ -27,6 +29,10 @@ class BusinessViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "queueCell", for: indexPath) as! QueueTableViewCell
         cell.timeField.text = queueArray[indexPath.row].startTime + " - " + queueArray[indexPath.row].endTime
         cell.seatField.text = queueArray[indexPath.row].seatLeft + " seats left (" +  queueArray[indexPath.row].seat + ")"
+//        cell.background.layer.shadowColor = UIColor.black.cgColor
+//        cell.background.layer.shadowOpacity = 1
+//        cell.background.layer.shadowOffset = .zero
+//        cell.background.layer.shadowRadius = 10
         return cell
     }
     
@@ -61,6 +67,7 @@ class BusinessViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     var queueArray : [TimeSlot] = []
+    var sortedArray : [TimeSlot] = []
     override func viewDidLoad() {
         let defaults = UserDefaults.standard
         let user = Auth.auth().currentUser
@@ -105,6 +112,15 @@ class BusinessViewController: UIViewController, UITableViewDelegate, UITableView
                             let temp = TimeSlot(queueId:id, startTime: data["startTime"] as! String, endTime: data["endTime"] as! String, seat: data["seat"] as! String, seatLeft: data["seatLeft"] as! String)
                             self.queueArray.append(temp)
                         }
+                        func sortedByTime(this:TimeSlot, that:TimeSlot) -> Bool {
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "HH:mm"
+                            let this_startTime = dateFormatter.date(from: this.startTime)!
+                            let that_startTime = dateFormatter.date(from: that.startTime)!
+                          return this_startTime < that_startTime
+                        }
+                        self.queueArray = self.queueArray.sorted(by: sortedByTime)
+                        
                         self.table.reloadData()
                     }
             }

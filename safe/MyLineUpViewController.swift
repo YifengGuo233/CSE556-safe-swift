@@ -50,27 +50,39 @@ class MyLineUpViewController: UIViewController, UITableViewDelegate, UITableView
     var lineUpArray: [MyLineUp] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetch()
+        print("view did load")
         table.delegate = self;
         table.dataSource = self;
-        table.reloadData()
+        //table.reloadData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("view will appear")
+        fetch()
+    }
+
     
     func fetch(){
         let db = Firestore.firestore()
+        print("fetch")
+        self.lineUpArray.removeAll()
         if let user = Auth.auth().currentUser{
             db.collection("users").document(user.uid).collection("LineUp")
-                .addSnapshotListener { querySnapshot, error in
+                .getDocuments() { querySnapshot, error in
                     guard let documents = querySnapshot?.documents else {
                         print("Error fetching documents: \(error!)")
                         return
                     }
+                    print("documents")
                     for document in documents {
+                        print(document)
                         let data = document.data()
                         let temp = MyLineUp(storeId: data["storeId"] as! String, storeName: data["storeName"] as! String, queueId: data["queueId"] as! String, startTime: data["startTime"] as! String, endTime: data["endTime"] as! String, waitCode: data["waitCode"] as! String)
                         self.lineUpArray.append(temp)
                     }
+                    self.table.reloadData()
                 }
         }
+        
     }
 }

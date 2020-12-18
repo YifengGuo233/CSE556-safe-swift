@@ -21,7 +21,7 @@ class SettingViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "settingBackSegue"){
             let barViewControllers = segue.destination as! UITabBarController
-            let destinationViewController = barViewControllers.selectedIndex=1
+            let destinationViewController = barViewControllers.selectedIndex=2
             }
     }
     

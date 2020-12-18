@@ -98,10 +98,17 @@ class DetailQueueViewController: UIViewController, UITableViewDelegate, UITableV
         /*Can only test on real device*/
         let contextItem2 = UIContextualAction(style: .normal, title: "Call") { [self] (contextualAction, view, boolValue) in
                 boolValue(true) // pass true if you want the handler to allow the action
+            let alert = UIAlertController(title: "Do you wanna call?", message: peopleArray[indexPath.row].phone , preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "Call", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
             if let url = URL(string: "tel://\(peopleArray[indexPath.row].phone)"),
                 UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
+            
         }
         contextItem2.backgroundColor = UIColor.green
             let swipeActions = UISwipeActionsConfiguration(actions: [contextItem1, contextItem2])
@@ -123,7 +130,7 @@ class DetailQueueViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidAppear(_ animated: Bool) {
         let alert = UIAlertController(title: "Note", message: "You can swipe right to edit/call person.", preferredStyle: .alert)
         self.present(alert, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             alert.dismiss(animated: true, completion: nil)
         }
     }
