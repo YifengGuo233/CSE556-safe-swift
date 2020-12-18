@@ -87,7 +87,7 @@ class GuestInfoViewController: UIViewController{
     
     @IBAction func Finish(_ sender: Any) {
         if(guestName.text != "" && guestPhoneNumber.text != ""){
-            let alert = UIAlertController(title: "Line Up", message: "You are line up now!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Line Up", message: "You are lined up!", preferredStyle: .alert)
             self.present(alert, animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     alert.dismiss(animated: true, completion: nil)
@@ -95,7 +95,7 @@ class GuestInfoViewController: UIViewController{
             }
         }
         else{
-            let alert = UIAlertController(title: "Need more information", message: "We may need you name and phone number to contact you", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Need more information", message: "We may need your name and phone number to contact you.", preferredStyle: .alert)
             self.present(alert, animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     alert.dismiss(animated: true, completion: nil)

@@ -17,11 +17,11 @@ class SignUpController: UIViewController{
         if(show){
             show = false
             password.isSecureTextEntry = false
-            showButton.setTitle("hide", for: .normal)
+            showButton.setTitle("Hide", for: .normal)
         }else{
             show = true
             password.isSecureTextEntry = true
-            showButton.setTitle("show", for: .normal)
+            showButton.setTitle("Show", for: .normal)
         }
     }
     
